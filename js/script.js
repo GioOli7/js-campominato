@@ -10,12 +10,30 @@
 // con difficoltà 1 => tra 1 e 80
 // con difficoltà 2 => tra 1 e 50
 
-var max = 100;
+var max = 0;
 var numBombe = 16;
 var bombe = [];
-var possibilita = max - numBombe;
+var possibilita = 0;
 var utenteList = [];  //numeri inseriti dall utente
 var utente = 0;
+
+//BONUS - Scelta difficoltà gioco
+var difficult = parseInt( prompt('Scegli la difficoltà alla quale giocare. \nDigita 0 per Facile\nDigita 1 per Medio\nDigita 2 per Difficile').trim() );
+while (isNaN(difficult) || difficult < 0 || difficult >= 3) {
+    difficult = parseInt(prompt('Scegli la difficoltà alla quale giocare. \nDigita 0 per Facile\nDigita 1 per Medio\nDigita 2 per Difficile'));
+}
+
+switch (difficult) {
+    case 0:
+        max = 100;
+        break;
+    case 1:
+        max = 80;
+        break;
+    case 2:
+        max = 50;
+}
+possibilita = max - numBombe;
 
 // popolo la lista bombe con 16 numeri unici
 while (bombe.length < numBombe) {
@@ -29,11 +47,11 @@ console.log(bombe);
 
 while (! bombe.includes(utente) && utenteList.length < possibilita) {
     // chiedo all utente di inserire un numero da 1 a 5
-    utente = parseInt(prompt(`Inserisci un numero da 1 a ${max} \nTentativi riusciti ${utenteList.length} su ${possibilita}`));
+    utente = parseInt(prompt(`Inserisci un numero da 1 a ${max} \nTentativi riusciti ${utenteList.length} su ${possibilita}`).trim());
     	
     // verifico che sia un numero valido
-    while (utente < 1 || utente > max) {
-        utente = parseInt(prompt(`Attenzione! Inserisci un numero da 1 a 5`));
+    while (isNaN(utente) || utente < 1 || utente > max) {
+        utente = parseInt(prompt(`Attenzione! Inserisci un numero da 1 a ${max}`));
     }
 
     // verifico se il numero corrisponde alla bomba
@@ -49,13 +67,11 @@ while (! bombe.includes(utente) && utenteList.length < possibilita) {
     // se è tutto ok, lo pusho all interno della lista utente
     else if ( ! utenteList.includes(utente)) {
        utenteList.push(utente);
-       console.log(utenteList);
     }
 
     // se l'utente raggiunge il numero di possibilità massime senza prendere la bomba, ha vinto!
     if (utenteList.length == possibilita) {
         console.log(`Hai vinto!!`);
     }
-    
 
 }
