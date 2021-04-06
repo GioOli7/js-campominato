@@ -10,8 +10,8 @@
 // con difficoltà 1 => tra 1 e 80
 // con difficoltà 2 => tra 1 e 50
 
-var max = 5;
-var numBombe = 1;
+var max = 100;
+var numBombe = 16;
 var bombe = [];
 var possibilita = max - numBombe;
 var utenteList = [];  //numeri inseriti dall utente
