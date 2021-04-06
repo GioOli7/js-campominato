@@ -10,8 +10,8 @@
 // con difficoltà 1 => tra 1 e 80
 // con difficoltà 2 => tra 1 e 50
 
-var max = 100;
-var numBombe = 16;
+var max = 5;
+var numBombe = 1;
 var bombe = [];
 var possibilita = max - numBombe;
 var utenteList = [];  //numeri inseriti dall utente
@@ -38,7 +38,9 @@ while (! bombe.includes(utente) && utenteList.length < possibilita) {
 
     // verifico se il numero corrisponde alla bomba
     if (bombe.includes(utente)) {
+        console.log(`-- GAME OVER --`);
         console.log(`Hai preso la bomba (bomba n. ${utente})`);
+        console.log(`Hai effettuato ${utenteList.length} tentativi corretti prima di perdere`);
     }
     // verifico che il numero inserito non sia stato già scelto
     else if (utenteList.includes(utente)) {
